@@ -271,3 +271,17 @@ public boolean remove(Object o) {
 - **containAll** | **addAll**
 
 containAll和addAll方法就是遍历传入集合，调用contian|add方法
+
+#### 4. fail-fast
+
+Java容器经常提到fail-fast机制，例如
+
+```java
+/**
+ * 注意，迭代器的快速失败行为无法得到保证，因为一般来说，不可能对是否出现不同步并发修改做出任何硬性保证。
+ * 快速失败（fail-fast）迭代器会尽最大努力抛出 ConcurrentModificationException。
+ * 因此，为提高这类迭代器的正确性而编写一个依赖于此异常的程序是错误的做法：迭代器的快速失败行为应该仅用于检测 bug。
+ */
+```
+
+fail-fast是Java容器的一种错误检查机制，当多个线程同时对容器作结构上的修改是，可能会出发fail-fast机制，通常，在容器中会存在一个modCount属性，用来存放修改容器结构的次数，然后再序列化或者其他时候，会检查该属性，如果检查失败，则抛出ConcurrentModificationException
